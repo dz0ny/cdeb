@@ -20,13 +20,17 @@ func md5file(filePath string) (string, error) {
 	}
 	defer in.Close()
 	digest := md5.New()
-	io.TeeReader(in, digest)
+	io.Copy(digest, in)
 	return fmt.Sprintf("%x  %s", digest.Sum(result), filePath), nil
 }
 
 func allToTar(location string, tarball *tar.Writer) error {
 
 	return filepath.Walk(location, func(filePath string, fileInfo os.FileInfo, _ error) error {
+
+		if fileInfo.IsDir() {
+			return nil
+		}
 
 		relPath, err := filepath.Rel(location, filePath)
 		if err != nil {
@@ -39,17 +43,20 @@ func allToTar(location string, tarball *tar.Writer) error {
 			ModTime:  fileInfo.ModTime(),
 			Typeflag: tar.TypeReg,
 		}
+
 		if err := tarball.WriteHeader(&hdr); err != nil {
 			return fmt.Errorf("cannot write header of file to tarball: %v", err)
 		}
+
 		in, err := os.Open(filePath)
 		if err != nil {
-			return err
+			return fmt.Errorf("cannot open file: %v", err)
 		}
 
-		if err := io.TeeReader(in, tarball); err != nil {
+		if _, err := io.Copy(tarball, in); err != nil {
 			return fmt.Errorf("cannot write data of file to tarball: %v", err)
 		}
+
 		return err
 	})
 
@@ -58,7 +65,10 @@ func allToTar(location string, tarball *tar.Writer) error {
 func md5data(location string) []string {
 	var filesmd5 []string
 
-	filepath.Walk(location, func(path string, _ os.FileInfo, _ error) error {
+	filepath.Walk(location, func(path string, fileInfo os.FileInfo, _ error) error {
+		if fileInfo.IsDir() {
+			return nil
+		}
 		relPath, err := filepath.Rel(location, path)
 		if err != nil {
 			return err

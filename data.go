@@ -13,7 +13,9 @@ func createData(now time.Time, path string) (dataTarGz []byte, err error) {
 	compress := gzip.NewWriter(buf)
 	tarball := tar.NewWriter(compress)
 
-	allToTar(path, tarball)
+	if err := allToTar(path, tarball); err != nil {
+		return nil, fmt.Errorf("adding files to data.tar.gz: %v", err)
+	}
 
 	if err := tarball.Close(); err != nil {
 		return nil, fmt.Errorf("closing data.tar.gz: %v", err)

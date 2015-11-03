@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 
 	"gopkg.in/alecthomas/kingpin.v2"
 )
@@ -25,8 +26,10 @@ func main() {
 	kingpin.CommandLine.Help = "Build packages for debian with great ease or declaritive template."
 	switch kingpin.Parse() {
 	case "dumb":
-		fmt.Printf("%v\n", createDumbDeb(*dDeb, *dRoot, *dControl))
-
+		err := createDumbDeb(*dDeb, *dRoot, *dControl)
+		if err != nil {
+			log.Fatalln(err)
+		}
 	case "gen":
 		fmt.Println("Not ready yet")
 

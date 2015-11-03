@@ -27,7 +27,9 @@ func createControl(now time.Time, path string, datamd5sums []byte) (controlTarGz
 		return nil, fmt.Errorf("cannot write md5sums file to control.tar.gz: %v", err)
 	}
 
-	allToTar(path, tarball)
+	if err := allToTar(path, tarball); err != nil {
+		return nil, fmt.Errorf("adding files to control.tar.gz: %v", err)
+	}
 
 	if err := tarball.Close(); err != nil {
 		return nil, fmt.Errorf("closing control.tar.gz: %v", err)
