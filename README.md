@@ -1,5 +1,9 @@
 # cdeb
 
+[![wercker status](https://app.wercker.com/status/1214b503d63d0bf2178dda7373d98983/m "wercker status")](https://app.wercker.com/project/bykey/1214b503d63d0bf2178dda7373d98983)
+
+You can find precompiled binaries under *Releases*.
+
 ```
 usage: cdeb [<flags>] <command> [<args> ...]
 

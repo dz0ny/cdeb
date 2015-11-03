@@ -22,7 +22,7 @@ var (
 
 func main() {
 
-	kingpin.Version("1.0").Author("Janez Troha")
+	kingpin.Version("0.1.0").Author("Janez Troha")
 	kingpin.CommandLine.Help = "Build packages for debian with great ease or declaritive template."
 	switch kingpin.Parse() {
 	case "dumb":
