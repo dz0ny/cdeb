@@ -36,3 +36,5 @@ Commands:
     Create .cdeb template.
 
 ```
+
+cdeb is sponsored by [Niteoweb, Ltd.](http://www.niteoweb.com/)
