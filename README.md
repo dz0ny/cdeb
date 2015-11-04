@@ -37,4 +37,4 @@ Commands:
 
 ```
 
-cdeb is sponsored by [Niteoweb Ltd.](http://www.niteoweb.com/)
+cdeb is sponsored by [NiteoWeb Ltd.](http://www.niteoweb.com/)
