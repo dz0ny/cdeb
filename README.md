@@ -1,8 +1,8 @@
 # cdeb
 
 [![wercker status](https://app.wercker.com/status/1214b503d63d0bf2178dda7373d98983/m "wercker status")](https://app.wercker.com/project/bykey/1214b503d63d0bf2178dda7373d98983)
+[![Go Report Card](https://goreportcard.com/badge/github.com/dz0ny/cdeb)](https://goreportcard.com/report/github.com/dz0ny/cdeb)
 
-You can find precompiled binaries under *Releases*.
 
 ```
 usage: cdeb [<flags>] <command> [<args> ...]
@@ -36,5 +36,13 @@ Commands:
     Create .cdeb template.
 
 ```
+
+You can find compiled binaries for your platform under "Releases" or if you prefer quick install:
+
+```
+$ curl -L https://github.com/dz0ny/cdeb/releases/download/v1.0.0/cdeb-`uname -s`-`uname -m` > /usr/local/bin/cdeb
+$ chmod +x /usr/local/bin/cdeb
+```
+
 
 cdeb is sponsored by [NiteoWeb Ltd.](http://www.niteoweb.com/)
