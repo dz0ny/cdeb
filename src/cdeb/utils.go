@@ -44,7 +44,7 @@ func allToTar(location string, tarball *tar.Writer) error {
 			Typeflag: tar.TypeReg,
 		}
 
-		if err := tarball.WriteHeader(&hdr); err != nil {
+		if err = tarball.WriteHeader(&hdr); err != nil {
 			return fmt.Errorf("cannot write header of file to tarball: %v", err)
 		}
 
@@ -53,7 +53,7 @@ func allToTar(location string, tarball *tar.Writer) error {
 			return fmt.Errorf("cannot open file: %v", err)
 		}
 
-		if _, err := io.Copy(tarball, in); err != nil {
+		if _, err = io.Copy(tarball, in); err != nil {
 			return fmt.Errorf("cannot write data of file to tarball: %v", err)
 		}
 

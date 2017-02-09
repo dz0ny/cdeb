@@ -7,6 +7,8 @@ import (
 	"gopkg.in/alecthomas/kingpin.v2"
 )
 
+var version = "dev"
+
 var (
 	verbose  = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
 	dumb     = kingpin.Command("dumb", "Create debian file from root and control folder.").Default()
@@ -22,8 +24,8 @@ var (
 
 func main() {
 
-	kingpin.Version("0.1.0").Author("Janez Troha")
-	kingpin.CommandLine.Help = "Build packages for debian with great ease or declaritive template."
+	kingpin.Version(version).Author("Janez Troha")
+	kingpin.CommandLine.Help = "Build packages for debian with great ease!"
 	switch kingpin.Parse() {
 	case "dumb":
 		err := createDumbDeb(*dDeb, *dRoot, *dControl)

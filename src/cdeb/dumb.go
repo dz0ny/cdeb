@@ -12,10 +12,10 @@ import (
 func createDumbDeb(debPath, rootPath, controlPath string) error {
 	now := time.Now()
 	deb, err := os.Create(debPath)
-	defer deb.Close()
 	if err != nil {
 		return err
 	}
+	defer deb.Close()
 
 	dataTarGz, err := createData(now, rootPath)
 	if err != nil {
